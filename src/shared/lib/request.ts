@@ -52,7 +52,6 @@ export async function fetchServices(params: ServiceListParams): Promise<ServiceL
     env: params.env,
     page: String(params.page),
     pageSize: String(params.pageSize),
-    ...(params.search && { search: params.search }),
   });
 
   const response = await fetch(`${API_BASE_URL}/api/services?${searchParams}`);

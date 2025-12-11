@@ -5,10 +5,10 @@ import { mockServices } from '../data';
 const DEFAULT_PAGE_SIZE = 20;
 
 export function getServices(params: ServiceListParams): ServiceListResponse {
-  const { language, platform, env, page, pageSize = DEFAULT_PAGE_SIZE, search } = params;
+  const { language, platform, env, page, pageSize = DEFAULT_PAGE_SIZE } = params;
 
-  // Filter by visibility
-  let filtered = mockServices.filter((service) => {
+  // Filter by visibility (language, platform, env)
+  const filtered = mockServices.filter((service) => {
     const { languages, platforms, environments } = service.visibility;
     return (
       languages.includes(language) &&
@@ -16,16 +16,6 @@ export function getServices(params: ServiceListParams): ServiceListResponse {
       environments.includes(env)
     );
   });
-
-  // Apply search filter
-  if (search && search.trim()) {
-    const searchLower = search.toLowerCase().trim();
-    filtered = filtered.filter(
-      (service) =>
-        service.name.toLowerCase().includes(searchLower) ||
-        service.description.toLowerCase().includes(searchLower)
-    );
-  }
 
   const totalCount = filtered.length;
   const startIndex = page * pageSize;

@@ -1,4 +1,4 @@
-import { type RecipeVariants, recipe } from '@vanilla-extract/recipes';
+import { recipe } from '@vanilla-extract/recipes';
 
 import { color, radii, typography } from '@shared/styles/tokens';
 
@@ -69,5 +69,3 @@ export const buttonStyle = recipe({
     size: 'md',
   },
 });
-
-export type ButtonVariants = RecipeVariants<typeof buttonStyle>;
