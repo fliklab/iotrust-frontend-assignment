@@ -6,3 +6,4 @@ export { SectionTitle } from './SectionTitle';
 export { OptimizedImage } from './OptimizedImage';
 export { ErrorBoundary } from './ErrorBoundary';
 export { ErrorFallback } from './ErrorFallback';
+export { ListItem } from './ListItem';

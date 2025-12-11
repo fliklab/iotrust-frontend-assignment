@@ -1,13 +1,12 @@
 import { style } from '@vanilla-extract/css';
 
-import { color, radii, spacing, typography } from '@shared/styles/tokens';
+import { color, radii, spacing } from '@shared/styles/tokens';
 
 export const container = style({
   display: 'flex',
   alignItems: 'center',
-  gap: spacing.md,
-  height: '80px',
-  padding: `0 ${spacing.lg}`,
+  gap: spacing.lg,
+  padding: `${spacing.md} 0`,
   cursor: 'pointer',
   transition: 'background-color 0.15s ease',
   selectors: {
@@ -24,6 +23,7 @@ export const iconWrapper = style({
   borderRadius: radii.md,
   backgroundColor: color.surface,
   overflow: 'hidden',
+  boxShadow: '0px 2px 4px rgba(0, 0, 0, 0.4)',
 });
 
 export const icon = style({
@@ -37,25 +37,24 @@ export const content = style({
   minWidth: 0,
 });
 
-export const name = style({
-  fontSize: typography.h2.fontSize,
-  fontWeight: typography.h2.fontWeight,
+export const title = style({
+  fontSize: '17px',
+  fontWeight: '600',
   color: color.textPrimary,
-  marginBottom: spacing.xs,
+  marginBottom: '4px',
   overflow: 'hidden',
   textOverflow: 'ellipsis',
   whiteSpace: 'nowrap',
 });
 
-export const description = style({
-  fontSize: typography.body.fontSize,
+export const subtitle = style({
+  fontSize: '14px',
   color: color.textSecondary,
   overflow: 'hidden',
   textOverflow: 'ellipsis',
   whiteSpace: 'nowrap',
 });
 
-export const arrow = style({
+export const action = style({
   flexShrink: 0,
-  color: color.textSecondary,
 });

@@ -1,7 +1,6 @@
-import { ChevronRight } from 'lucide-react';
+import { ListItem } from '@shared/ui';
 
 import type { Service } from '../types';
-import * as styles from './ServiceItem.css';
 
 interface ServiceItemProps {
   service: Service;
@@ -18,20 +17,12 @@ export function ServiceItem({ service, onClick }: ServiceItemProps) {
   };
 
   return (
-    <div className={styles.container} onClick={handleClick}>
-      <div className={styles.iconWrapper}>
-        <img
-          src={service.iconUrl}
-          alt={service.name}
-          className={styles.icon}
-          loading="lazy"
-        />
-      </div>
-      <div className={styles.content}>
-        <div className={styles.name}>{service.name}</div>
-        <div className={styles.description}>{service.description}</div>
-      </div>
-      <ChevronRight size={20} className={styles.arrow} />
-    </div>
+    <ListItem
+      iconUrl={service.iconUrl}
+      iconAlt={service.name}
+      title={service.name}
+      subtitle={service.description}
+      onClick={handleClick}
+    />
   );
 }
