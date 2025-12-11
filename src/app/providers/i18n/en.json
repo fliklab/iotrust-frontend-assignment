@@ -19,7 +19,9 @@
     "title": "LIST",
     "searchPlaceholder": "Search services",
     "empty": "No services available",
-    "noSearchResults": "No search results"
+    "noSearchResults": "No search results",
+    "description": "Description",
+    "go": "Go"
   },
   "banner": {
     "go": "Go"

@@ -19,7 +19,9 @@
     "title": "목록",
     "searchPlaceholder": "서비스 검색",
     "empty": "서비스가 없습니다",
-    "noSearchResults": "검색 결과가 없습니다"
+    "noSearchResults": "검색 결과가 없습니다",
+    "description": "상세 설명",
+    "go": "바로가기"
   },
   "banner": {
     "go": "바로가기"

@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { useVirtualizer } from '@tanstack/react-virtual';
@@ -8,6 +8,7 @@ import { SectionTitle } from '@shared/ui';
 import { useFetchServices, useServiceSearch } from '../hooks';
 import type { Service } from '../types';
 import { SearchInput } from './SearchInput';
+import { ServiceDetailSheet } from './ServiceDetailSheet';
 import { ServiceItem } from './ServiceItem';
 import * as styles from './ServiceList.css';
 import { ServiceSkeleton } from './ServiceSkeleton';
@@ -31,9 +32,18 @@ export function ServiceList() {
   const { t } = useTranslation();
   const parentRef = useRef<HTMLDivElement>(null);
   const { searchTerm, setSearchTerm, debouncedSearch } = useServiceSearch();
+  const [selectedService, setSelectedService] = useState<Service | null>(null);
 
   const { data, isLoading, isFetchingNextPage, hasNextPage, fetchNextPage } =
     useFetchServices();
+
+  const handleServiceClick = (service: Service) => {
+    setSelectedService(service);
+  };
+
+  const handleCloseSheet = () => {
+    setSelectedService(null);
+  };
 
   // All loaded items from server
   const allLoadedItems = useMemo(
@@ -141,7 +151,10 @@ export function ServiceList() {
                     transform: `translateY(${virtualItem.start}px)`,
                   }}
                 >
-                  <ServiceItem service={service} />
+                  <ServiceItem
+                    service={service}
+                    onClick={handleServiceClick}
+                  />
                 </div>
               );
             })}
@@ -152,6 +165,12 @@ export function ServiceList() {
       {isFetchingNextPage && (
         <div className={styles.loadingMore}>{t('common.loading')}</div>
       )}
+
+      <ServiceDetailSheet
+        service={selectedService}
+        isOpen={selectedService !== null}
+        onClose={handleCloseSheet}
+      />
     </div>
   );
 }

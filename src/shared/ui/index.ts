@@ -1,5 +1,6 @@
 export { Button } from './Button';
 export { Modal } from './Modal';
+export { BottomSheet } from './BottomSheet';
 export { Skeleton } from './Skeleton';
 export { Typography } from './Typography';
 export { SectionTitle } from './SectionTitle';
