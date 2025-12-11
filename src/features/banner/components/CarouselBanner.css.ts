@@ -1,7 +1,5 @@
 import { style } from '@vanilla-extract/css';
 
-import { spacing } from '@shared/styles/tokens';
-
 export const container = style({
   position: 'relative',
   width: '100%',
@@ -16,5 +14,4 @@ export const track = style({
 export const slide = style({
   flexShrink: 0,
   width: '100%',
-  padding: `0 ${spacing.lg}`,
 });

@@ -6,7 +6,6 @@ export const container = style({
   position: 'relative',
   width: '100%',
   height: '120px',
-  borderRadius: radii.lg,
   overflow: 'hidden',
   background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
 });
@@ -24,9 +23,10 @@ export const content = style({
   zIndex: 1,
   display: 'flex',
   flexDirection: 'column',
-  justifyContent: 'center',
+  justifyContent: 'flex-end',
   height: '100%',
   padding: spacing.lg,
+  paddingBottom: spacing.xl,
 });
 
 export const title = style({
