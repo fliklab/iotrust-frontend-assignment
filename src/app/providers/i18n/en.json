@@ -1,0 +1,27 @@
+{
+  "common": {
+    "cancel": "Cancel",
+    "ok": "OK",
+    "delete": "Delete",
+    "retry": "Retry",
+    "search": "Search",
+    "loading": "Loading...",
+    "error": "An error occurred",
+    "noResults": "No results"
+  },
+  "favorites": {
+    "title": "Favorites",
+    "empty": "Add your favorites",
+    "deleteTitle": "Delete favorite",
+    "deleteMessage": "Do you really want to delete this site from your favorites?"
+  },
+  "services": {
+    "title": "LIST",
+    "searchPlaceholder": "Search services",
+    "empty": "No services available",
+    "noSearchResults": "No search results"
+  },
+  "banner": {
+    "go": "Go"
+  }
+}
