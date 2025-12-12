@@ -7,7 +7,7 @@ export function ServiceSkeleton() {
     <div className={styles.container}>
       <Skeleton width={56} height={56} variant="rounded" />
       <div className={styles.content}>
-        <Skeleton width="50%" height={18} style={{ marginBottom: '8px' }} />
+        <Skeleton width="50%" height={17} style={{ marginBottom: '4px' }} />
         <Skeleton width="80%" height={14} />
       </div>
     </div>

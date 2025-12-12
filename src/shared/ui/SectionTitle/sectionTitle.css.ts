@@ -9,6 +9,7 @@ export const container = style({
   paddingTop: spacing.xl,
   paddingBottom: spacing.md,
   borderTop: `1px solid ${color.border}`,
+  borderBottom: `1px solid ${color.border}`,
 });
 
 export const title = style({

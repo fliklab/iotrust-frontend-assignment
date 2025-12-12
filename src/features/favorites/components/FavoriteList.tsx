@@ -34,10 +34,10 @@ export function FavoriteList() {
       <div className={styles.container}>
         <SectionTitle>{t('dapp_favorite_title')}</SectionTitle>
         {Array.from({ length: 3 }).map((_, i) => (
-          <div key={i} style={{ padding: '12px 0', display: 'flex', gap: '12px' }}>
-            <Skeleton width={64} height={64} variant="rounded" />
+          <div key={i} style={{ padding: '12px 0', display: 'flex', gap: '16px' }}>
+            <Skeleton width={56} height={56} variant="rounded" />
             <div style={{ flex: 1 }}>
-              <Skeleton width="60%" height={20} style={{ marginBottom: '8px' }} />
+              <Skeleton width="60%" height={17} style={{ marginBottom: '4px' }} />
               <Skeleton width="80%" height={14} />
             </div>
           </div>

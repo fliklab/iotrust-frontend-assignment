@@ -9,6 +9,7 @@ export const container = style({
   padding: `${spacing.md} 0`,
   cursor: 'pointer',
   transition: 'background-color 0.15s ease',
+  borderBottom: `1px solid ${color.border}`,
   selectors: {
     '&:active': {
       backgroundColor: color.surface,

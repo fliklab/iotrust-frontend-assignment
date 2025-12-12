@@ -5,9 +5,8 @@ import { spacing } from '@shared/styles/tokens';
 export const container = style({
   display: 'flex',
   alignItems: 'center',
-  gap: spacing.md,
-  height: '80px',
-  padding: `0 ${spacing.lg}`,
+  gap: spacing.lg,
+  padding: `${spacing.md} 0`,
 });
 
 export const content = style({
