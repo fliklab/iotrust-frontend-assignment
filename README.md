@@ -59,7 +59,7 @@ pnpm build:prod   # production 환경 빌드
 
 | 플래그                   | 설명                        | 기본값 |
 | ------------------------ | --------------------------- | ------ |
-| `VITE_TEST_LARGE_LIST`   | 1000개 아이템 리스트 테스트 | `true` |
+| `VITE_TEST_LARGE_LIST`   | 1000개 아이템 리스트 테스트 | `false` |
 | `VITE_MOCK_DELAY`        | Mock 요청 지연 시간 (ms)    | `200`  |
 | `VITE_MOCK_FAILURE_RATE` | 요청 실패 확률 (0-100%)     | `10`   |
 
