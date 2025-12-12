@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next';
 
 import { useVirtualizer } from '@tanstack/react-virtual';
 
-import { SectionTitle } from '@shared/ui';
+import { ErrorFallback, SectionTitle } from '@shared/ui';
 
 import { useFetchServices, useServiceSearch } from '../hooks';
 import type { Service } from '../types';
@@ -34,8 +34,15 @@ export function ServiceList() {
   const { searchTerm, setSearchTerm, debouncedSearch } = useServiceSearch();
   const [selectedService, setSelectedService] = useState<Service | null>(null);
 
-  const { data, isLoading, isFetchingNextPage, hasNextPage, fetchNextPage } =
-    useFetchServices();
+  const {
+    data,
+    isLoading,
+    isError,
+    refetch,
+    isFetchingNextPage,
+    hasNextPage,
+    fetchNextPage,
+  } = useFetchServices();
 
   const handleServiceClick = (service: Service) => {
     setSelectedService(service);
@@ -115,6 +122,15 @@ export function ServiceList() {
         {Array.from({ length: 5 }).map((_, i) => (
           <ServiceSkeleton key={i} />
         ))}
+      </div>
+    );
+  }
+
+  if (isError) {
+    return (
+      <div className={styles.container}>
+        <SectionTitle>{t('dapp_list_title')}</SectionTitle>
+        <ErrorFallback onRetry={() => refetch()} />
       </div>
     );
   }

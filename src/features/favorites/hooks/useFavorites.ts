@@ -45,6 +45,7 @@ export function useFavorites() {
     favorites: query.data?.items ?? [],
     isLoading: query.isLoading,
     isError: query.isError,
+    refetch: query.refetch,
     deleteFavorite: deleteMutation.mutate,
     isDeleting: deleteMutation.isPending,
   };

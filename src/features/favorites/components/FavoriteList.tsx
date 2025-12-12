@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
-import { SectionTitle, Skeleton } from '@shared/ui';
+import { ErrorFallback, SectionTitle, Skeleton } from '@shared/ui';
 
 import { useFavorites } from '../hooks';
 import { DeleteFavoriteModal } from './DeleteFavoriteModal';
@@ -10,7 +10,8 @@ import * as styles from './FavoriteList.css';
 
 export function FavoriteList() {
   const { t } = useTranslation();
-  const { favorites, isLoading, deleteFavorite } = useFavorites();
+  const { favorites, isLoading, isError, refetch, deleteFavorite } =
+    useFavorites();
   const [deleteTargetId, setDeleteTargetId] = useState<string | null>(null);
 
   const handleDeleteClick = (id: string) => {
@@ -41,6 +42,15 @@ export function FavoriteList() {
             </div>
           </div>
         ))}
+      </div>
+    );
+  }
+
+  if (isError) {
+    return (
+      <div className={styles.container}>
+        <SectionTitle>{t('dapp_favorite_title')}</SectionTitle>
+        <ErrorFallback onRetry={() => refetch()} />
       </div>
     );
   }
