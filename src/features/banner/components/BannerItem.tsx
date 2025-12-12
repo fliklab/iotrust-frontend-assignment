@@ -1,3 +1,5 @@
+import { OptimizedImage } from '@shared/ui';
+
 import type { Banner } from '../types';
 import * as styles from './BannerItem.css';
 
@@ -39,17 +41,14 @@ export function BannerItem({ banner, isFirst = false }: BannerItemProps) {
 
   return (
     <div className={styles.container}>
-      <picture>
-        {banner.image.webp && <source srcSet={banner.image.webp} type="image/webp" />}
-        <img
-          src={banner.image.original}
-          alt=""
-          className={styles.image}
-          loading={isFirst ? 'eager' : 'lazy'}
-          decoding={isFirst ? 'sync' : 'async'}
-          fetchPriority={isFirst ? 'high' : undefined}
-        />
-      </picture>
+      <OptimizedImage
+        image={banner.image}
+        alt="Banner"
+        className={styles.image}
+        loading={isFirst ? 'eager' : 'lazy'}
+        decoding={isFirst ? 'sync' : 'async'}
+        fetchPriority={isFirst ? 'high' : undefined}
+      />
       <div className={styles.content}>
         {banner.description && (
           <p className={styles.description}>

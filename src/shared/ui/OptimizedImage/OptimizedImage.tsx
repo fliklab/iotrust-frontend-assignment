@@ -1,11 +1,12 @@
-import type { ImgHTMLAttributes } from 'react';
+import { type ImgHTMLAttributes, useState } from 'react';
+
+import type { ImageAsset } from '@shared/types';
 
 import * as styles from './optimizedImage.css';
 
 interface OptimizedImageProps
   extends Omit<ImgHTMLAttributes<HTMLImageElement>, 'src'> {
-  src: string;
-  webpSrc?: string;
+  image: ImageAsset;
   alt: string;
   width?: number | string;
   height?: number | string;
@@ -14,8 +15,7 @@ interface OptimizedImageProps
 }
 
 export function OptimizedImage({
-  src,
-  webpSrc,
+  image,
   alt,
   width,
   height,
@@ -23,9 +23,15 @@ export function OptimizedImage({
   className,
   ...props
 }: OptimizedImageProps) {
+  const [hasError, setHasError] = useState(false);
+
   const containerStyle = {
     width: typeof width === 'number' ? `${width}px` : width,
     height: typeof height === 'number' ? `${height}px` : height,
+  };
+
+  const handleError = () => {
+    setHasError(true);
   };
 
   return (
@@ -33,17 +39,22 @@ export function OptimizedImage({
       className={`${styles.container} ${rounded ? styles.rounded : ''} ${className ?? ''}`}
       style={containerStyle}
     >
-      <picture>
-        {webpSrc && <source srcSet={webpSrc} type="image/webp" />}
-        <img
-          src={src}
-          alt={alt}
-          loading="lazy"
-          decoding="async"
-          className={styles.image}
-          {...props}
-        />
-      </picture>
+      {hasError ? (
+        <div className={styles.fallback} />
+      ) : (
+        <picture>
+          {image.webp && <source srcSet={image.webp} type="image/webp" />}
+          <img
+            src={image.original}
+            alt={alt}
+            loading="lazy"
+            decoding="async"
+            className={styles.image}
+            onError={handleError}
+            {...props}
+          />
+        </picture>
+      )}
     </div>
   );
 }

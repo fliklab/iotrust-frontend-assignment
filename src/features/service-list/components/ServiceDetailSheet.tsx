@@ -1,6 +1,6 @@
 import { useTranslation } from 'react-i18next';
 
-import { BottomSheet } from '@shared/ui';
+import { BottomSheet, OptimizedImage } from '@shared/ui';
 
 import type { Service } from '../types';
 import * as styles from './ServiceDetailSheet.css';
@@ -39,16 +39,11 @@ export function ServiceDetailSheet({
     >
       <div className={styles.header}>
         <div className={styles.iconWrapper}>
-          <picture>
-            {service.icon.webp && <source srcSet={service.icon.webp} type="image/webp" />}
-            <img
-              src={service.icon.original}
-              alt={service.name}
-              className={styles.icon}
-              loading="lazy"
-              decoding="async"
-            />
-          </picture>
+          <OptimizedImage
+            image={service.icon}
+            alt={service.name}
+            className={styles.icon}
+          />
         </div>
         <div className={styles.serviceName}>{service.name}</div>
       </div>

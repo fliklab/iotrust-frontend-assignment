@@ -18,3 +18,9 @@ export const image = style({
 export const rounded = style({
   borderRadius: radii.md,
 });
+
+export const fallback = style({
+  width: '100%',
+  height: '100%',
+  backgroundColor: '#87CEEB',
+});

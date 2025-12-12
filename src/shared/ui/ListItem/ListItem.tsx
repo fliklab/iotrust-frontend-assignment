@@ -2,6 +2,7 @@ import type { ReactNode } from 'react';
 
 import type { ImageAsset } from '@shared/types';
 
+import { OptimizedImage } from '../OptimizedImage';
 import * as styles from './listItem.css';
 
 interface ListItemProps {
@@ -24,16 +25,7 @@ export function ListItem({
   return (
     <div className={styles.container} onClick={onClick}>
       <div className={styles.iconWrapper}>
-        <picture>
-          {icon.webp && <source srcSet={icon.webp} type="image/webp" />}
-          <img
-            src={icon.original}
-            alt={iconAlt}
-            className={styles.icon}
-            loading="lazy"
-            decoding="async"
-          />
-        </picture>
+        <OptimizedImage image={icon} alt={iconAlt} className={styles.icon} />
       </div>
       <div className={styles.content}>
         <div className={styles.title}>{title}</div>
