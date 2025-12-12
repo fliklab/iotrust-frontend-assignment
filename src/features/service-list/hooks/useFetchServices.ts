@@ -21,5 +21,14 @@ export function useFetchServices() {
       }),
     initialPageParam: 0,
     getNextPageParam: (lastPage) => lastPage.nextCursor,
+    retry: (failureCount, error) => {
+      if (failureCount < 3) {
+        console.warn(`[Services] 재시도 ${failureCount}/3...`, error);
+        return true;
+      }
+      console.warn(`[Services] 최대 재시도 횟수 초과`, error);
+      return false;
+    },
+    retryDelay: (attemptIndex) => Math.min(1000 * 2 ** attemptIndex, 10000),
   });
 }
