@@ -107,10 +107,14 @@ src/
 - Lazy Loading을 기본 적용하되, 배너의 첫 번째 이미지는 Eager Load로 LCP(Largest Contentful Paint)를 최적화합니다.
 - WebP 이미지 서빙을 위해 별도 서버를 구축하고 `VITE_OPTIMIZED_IMAGE_BASE_URL` 환경 변수로 관리합니다.
 
+- 관련 파일: `src/shared/ui/OptimizedImage/OptimizedImage.tsx`
+
 #### 언어/디바이스 결정 전략
 
 - **언어**: URL 경로(`/ko`, `/en`) → `navigator.language` → 기본값(`en`) 순으로 결정합니다.
 - **플랫폼**: Query param(`?platform=`) → User Agent → 기본값(`android`) 순으로 결정합니다.
+
+- 관련 파일: `src/app/providers/i18n/detectLanguage.ts`, `src/app/providers/device/deviceInfo.ts`, `src/app/store/app.store.ts`
 
 #### 가상 스크롤 & 무한 스크롤
 
@@ -118,11 +122,15 @@ src/
 - `scrollMargin`을 동적으로 계산하여 헤더/배너 영역을 고려한 정확한 스크롤 위치를 보장합니다.
 - `useInfiniteQuery`를 활용한 페이지네이션으로 대용량 리스트(1000개 이상)를 효율적으로 처리합니다.
 
+- 관련 파일: `src/features/service-list/components/ServiceList.tsx`, `src/features/service-list/hooks/useFetchServices.ts`
+
 #### 에러 핸들링
 
 - 모든 API 요청에 최대 3회 재시도 + 지수 백오프(1초 → 2초 → 4초)를 적용합니다.
 - Fetch More 실패 시에도 기존 데이터를 유지하여 사용자 경험을 보호합니다.
 - 재시도 현황은 콘솔에 로깅하여 디버깅을 지원합니다.
+
+- 관련 파일: `src/features/service-list/hooks/useFetchServices.ts`, `src/features/banner/hooks/useFetchBannerList.ts`, `src/features/favorites/hooks/useFavorites.ts`
 
 #### 검색 필터링
 
@@ -130,11 +138,15 @@ src/
 - Debounce를 적용하여 불필요한 연산을 방지합니다.
 - 검색 결과가 부족할 경우 자동으로 추가 데이터를 Fetch합니다.
 
+- 관련 파일: `src/features/service-list/hooks/useServiceSearch.ts`, `src/features/service-list/components/SearchInput.tsx`
+
 #### 상태 관리
 
 - **전역 상태**: Zustand로 언어, 플랫폼, 환경 정보를 관리합니다.
 - **서버 상태**: React Query로 캐싱, 백그라운드 리페치를 처리합니다.
 - **즐겨찾기**: Optimistic Update로 즉각적인 UI 반응을 제공하고, 실패 시 롤백합니다.
+
+- 관련 파일: `src/app/store/app.store.ts`, `src/app/providers/query/queryClient.ts`, `src/features/favorites/hooks/useFavorites.ts`
 
 #### UI/UX
 
@@ -142,9 +154,13 @@ src/
 - **바텀시트**: slideUp 애니메이션, ESC 닫기, 배경 스크롤 방지
 - **공통 컴포넌트**: ListItem, Skeleton, ErrorFallback, SectionTitle
 
+- 관련 파일: `src/features/banner/components/CarouselBanner.tsx`, `src/shared/ui/BottomSheet/BottomSheet.tsx`, `src/shared/ui/ListItem/ListItem.tsx`, `src/shared/ui/Skeleton/Skeleton.tsx`
+
 #### 테스트 지원
 
 - 개발 환경 전용 플래그(`VITE_TEST_LARGE_LIST`, `VITE_MOCK_DELAY`, `VITE_MOCK_FAILURE_RATE`)로 1000개의 리스트, 네트워크 에러를 테스트할 수 있습니다
+
+- 관련 파일: `.env.development`, `src/mocks/handlers/services.handler.ts`
 
 ## AI 활용 전략
 
