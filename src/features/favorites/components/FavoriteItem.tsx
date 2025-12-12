@@ -32,10 +32,10 @@ export function FavoriteItem({ favorite, onDelete }: FavoriteItemProps) {
             e.stopPropagation();
             onDelete(favorite.id);
           }}
-          aria-label={t('common.delete')}
+          aria-label={t('dapp_favorite_delete')}
         >
           <Bookmark size={20} fill="currentColor" />
-          <span className={styles.deleteText}>{t('common.delete')}</span>
+          <span className={styles.deleteText}>{t('dapp_favorite_delete')}</span>
         </button>
       }
     />

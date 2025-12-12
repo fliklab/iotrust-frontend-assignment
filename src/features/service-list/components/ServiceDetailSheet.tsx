@@ -32,7 +32,7 @@ export function ServiceDetailSheet({
       footer={
         <div className={styles.footerContainer}>
           <button className={styles.goButton} onClick={handleGo}>
-            {t('services.go')}
+            {t('go_to_dapp')}
           </button>
         </div>
       }

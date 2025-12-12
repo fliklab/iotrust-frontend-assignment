@@ -108,7 +108,7 @@ export function ServiceList() {
   if (isLoading) {
     return (
       <div className={styles.container}>
-        <SectionTitle>{t('services.title')}</SectionTitle>
+        <SectionTitle>{t('dapp_list_title')}</SectionTitle>
         <div className={styles.searchWrapper}>
           <SearchInput value={searchTerm} onChange={setSearchTerm} />
         </div>
@@ -123,7 +123,7 @@ export function ServiceList() {
 
   return (
     <div className={styles.container}>
-      <SectionTitle>{t('services.title')}</SectionTitle>
+      <SectionTitle>{t('dapp_list_title')}</SectionTitle>
       <div className={styles.searchWrapper}>
         <SearchInput value={searchTerm} onChange={setSearchTerm} />
       </div>

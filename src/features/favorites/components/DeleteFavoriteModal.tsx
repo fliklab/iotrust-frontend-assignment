@@ -26,16 +26,16 @@ export function DeleteFavoriteModal({
     <Modal isOpen={isOpen} onClose={onClose}>
       <Modal.Title>{t('favorites.deleteTitle')}</Modal.Title>
       <Modal.Divider />
-      <Modal.Message>{t('favorites.deleteMessage')}</Modal.Message>
+      <Modal.Message>{t('dapp_favorite_delete_confirm')}</Modal.Message>
       <Modal.ButtonGroup>
         <div className={styles.buttonWrapper}>
           <Button variant="secondary" fullWidth onClick={onClose}>
-            {t('common.cancel')}
+            {t('button_cancel')}
           </Button>
         </div>
         <div className={styles.buttonWrapper}>
           <Button variant="secondary" fullWidth onClick={handleConfirm}>
-            {t('common.ok')}
+            {t('button_confirm')}
           </Button>
         </div>
       </Modal.ButtonGroup>

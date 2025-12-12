@@ -31,7 +31,7 @@ export function FavoriteList() {
   if (isLoading) {
     return (
       <div className={styles.container}>
-        <SectionTitle>{t('favorites.title')}</SectionTitle>
+        <SectionTitle>{t('dapp_favorite_title')}</SectionTitle>
         {Array.from({ length: 3 }).map((_, i) => (
           <div key={i} style={{ padding: '12px 0', display: 'flex', gap: '12px' }}>
             <Skeleton width={64} height={64} variant="rounded" />
@@ -47,7 +47,7 @@ export function FavoriteList() {
 
   return (
     <div className={styles.container}>
-      <SectionTitle>{t('favorites.title')}</SectionTitle>
+      <SectionTitle>{t('dapp_favorite_title')}</SectionTitle>
       {favorites.length === 0 ? (
         <div className={styles.emptyState}>{t('favorites.empty')}</div>
       ) : (
