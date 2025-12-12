@@ -38,12 +38,16 @@ export function BannerItem({ banner }: BannerItemProps) {
 
   return (
     <div className={styles.container}>
-      <img
-        src={banner.imageUrl}
-        alt=""
-        className={styles.image}
-        loading="lazy"
-      />
+      <picture>
+        {banner.image.webp && <source srcSet={banner.image.webp} type="image/webp" />}
+        <img
+          src={banner.image.original}
+          alt=""
+          className={styles.image}
+          loading="lazy"
+          decoding="async"
+        />
+      </picture>
       <div className={styles.content}>
         {banner.description && (
           <p className={styles.description}>

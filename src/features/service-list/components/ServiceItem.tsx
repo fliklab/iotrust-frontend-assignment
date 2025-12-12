@@ -18,7 +18,7 @@ export function ServiceItem({ service, onClick }: ServiceItemProps) {
 
   return (
     <ListItem
-      iconUrl={service.iconUrl}
+      icon={service.icon}
       iconAlt={service.name}
       title={service.name}
       subtitle={service.description}

@@ -1,8 +1,10 @@
+import type { ImageAsset } from './image';
+
 export interface Favorite {
   id: string;
   serviceId: string;
   name: string;
-  iconUrl: string;
+  icon: ImageAsset;
   url: string;
 }
 

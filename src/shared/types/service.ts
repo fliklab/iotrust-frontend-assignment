@@ -1,11 +1,13 @@
 import type { Environment, Platform } from '@app/providers/device';
 import type { Language } from '@app/providers/i18n';
 
+import type { ImageAsset } from './image';
+
 export interface Service {
   id: string;
   name: string;
   description: string;
-  iconUrl: string;
+  icon: ImageAsset;
   url: string;
   visibility: {
     languages: Language[];

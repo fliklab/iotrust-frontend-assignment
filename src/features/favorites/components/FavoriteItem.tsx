@@ -20,7 +20,7 @@ export function FavoriteItem({ favorite, onDelete }: FavoriteItemProps) {
 
   return (
     <ListItem
-      iconUrl={favorite.iconUrl}
+      icon={favorite.icon}
       iconAlt={favorite.name}
       title={favorite.name}
       subtitle={favorite.url}

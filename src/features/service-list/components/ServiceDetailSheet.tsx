@@ -39,11 +39,16 @@ export function ServiceDetailSheet({
     >
       <div className={styles.header}>
         <div className={styles.iconWrapper}>
-          <img
-            src={service.iconUrl}
-            alt={service.name}
-            className={styles.icon}
-          />
+          <picture>
+            {service.icon.webp && <source srcSet={service.icon.webp} type="image/webp" />}
+            <img
+              src={service.icon.original}
+              alt={service.name}
+              className={styles.icon}
+              loading="lazy"
+              decoding="async"
+            />
+          </picture>
         </div>
         <div className={styles.serviceName}>{service.name}</div>
       </div>

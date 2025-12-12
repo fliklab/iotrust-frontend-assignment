@@ -1,8 +1,10 @@
 import type { Language } from '@app/providers/i18n';
 
+import type { ImageAsset } from './image';
+
 export interface Banner {
   id: string;
-  imageUrl: string;
+  image: ImageAsset;
   linkUrl: string;
   description?: string;
   ctaText?: string;
