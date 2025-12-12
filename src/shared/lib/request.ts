@@ -5,8 +5,24 @@ import type { BannerListParams, BannerListResponse, FavoriteListResponse, Servic
 const isDev = import.meta.env.VITE_ENV === 'development';
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
+// Mock 테스트 플래그
+const MOCK_DELAY = Number(import.meta.env.VITE_MOCK_DELAY) || 300;
+const MOCK_FAILURE_RATE = Number(import.meta.env.VITE_MOCK_FAILURE_RATE) || 0;
+
 // Simulate network delay in dev mode
 const delay = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
+
+// Simulate random failure based on failure rate (0-100)
+function shouldFail(): boolean {
+  return Math.random() * 100 < MOCK_FAILURE_RATE;
+}
+
+class MockError extends Error {
+  constructor() {
+    super('Simulated network error');
+    this.name = 'MockError';
+  }
+}
 
 class ApiError extends Error {
   status: number;
@@ -37,7 +53,8 @@ async function handleResponse<T>(response: Response): Promise<T> {
 
 export async function fetchBanners(params: BannerListParams): Promise<BannerListResponse> {
   if (isDev) {
-    await delay(300);
+    await delay(MOCK_DELAY);
+    if (shouldFail()) throw new MockError();
     return getBanners(params);
   }
 
@@ -51,7 +68,8 @@ export async function fetchBanners(params: BannerListParams): Promise<BannerList
 
 export async function fetchFavorites(): Promise<FavoriteListResponse> {
   if (isDev) {
-    await delay(200);
+    await delay(MOCK_DELAY);
+    if (shouldFail()) throw new MockError();
     return getFavorites();
   }
 
@@ -61,7 +79,8 @@ export async function fetchFavorites(): Promise<FavoriteListResponse> {
 
 export async function removeFavorite(id: string): Promise<void> {
   if (isDev) {
-    await delay(200);
+    await delay(MOCK_DELAY);
+    if (shouldFail()) throw new MockError();
     deleteFavorite(id);
     return;
   }
@@ -74,7 +93,8 @@ export async function removeFavorite(id: string): Promise<void> {
 
 export async function fetchServices(params: ServiceListParams): Promise<ServiceListResponse> {
   if (isDev) {
-    await delay(300);
+    await delay(MOCK_DELAY);
+    if (shouldFail()) throw new MockError();
     return getServices(params);
   }
 

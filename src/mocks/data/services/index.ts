@@ -7,11 +7,28 @@ import { servicesEn } from './services.en';
 import { servicesKo } from './services.ko';
 import { serviceVisibility } from './visibility';
 
+const TEST_LARGE_LIST = import.meta.env.VITE_TEST_LARGE_LIST === 'true';
+const LARGE_LIST_COUNT = 1000;
+
 // 언어에 따라 서비스 데이터 선택
 function getServicesByLanguage(
   language: Language
 ): Omit<Service, 'visibility'>[] {
   return language === 'ko' ? servicesKo : servicesEn;
+}
+
+// 대량 데이터 생성 (테스트용)
+function generateLargeList(baseServices: Service[], count: number): Service[] {
+  const result: Service[] = [];
+  for (let i = 0; i < count; i++) {
+    const baseService = baseServices[i % baseServices.length];
+    result.push({
+      ...baseService,
+      id: `${baseService.id}-${i}`,
+      name: `${baseService.name} #${i + 1}`,
+    });
+  }
+  return result;
 }
 
 // 필터링된 서비스 반환 (언어, 플랫폼, 환경 기준)
@@ -22,7 +39,7 @@ export function getFilteredServices(
 ): Service[] {
   const services = getServicesByLanguage(language);
 
-  return services
+  const filtered = services
     .filter((service) => {
       const visibility = serviceVisibility[service.id];
       if (!visibility) return false;
@@ -37,6 +54,12 @@ export function getFilteredServices(
       ...service,
       visibility: serviceVisibility[service.id],
     }));
+
+  if (TEST_LARGE_LIST) {
+    return generateLargeList(filtered, LARGE_LIST_COUNT);
+  }
+
+  return filtered;
 }
 
 // 모든 서비스 (visibility 포함)
