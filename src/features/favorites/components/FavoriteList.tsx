@@ -1,12 +1,13 @@
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
-import { ErrorFallback, SectionTitle, Skeleton } from '@shared/ui';
+import { ErrorFallback, SectionTitle } from '@shared/ui';
 
 import { useFavorites } from '../hooks';
 import { DeleteFavoriteModal } from './DeleteFavoriteModal';
 import { FavoriteItem } from './FavoriteItem';
 import * as styles from './FavoriteList.css';
+import { FavoriteSkeleton } from './FavoriteSkeleton';
 
 export function FavoriteList() {
   const { t } = useTranslation();
@@ -34,13 +35,7 @@ export function FavoriteList() {
       <div className={styles.container}>
         <SectionTitle>{t('dapp_favorite_title')}</SectionTitle>
         {Array.from({ length: 3 }).map((_, i) => (
-          <div key={i} style={{ padding: '12px 0', display: 'flex', gap: '16px' }}>
-            <Skeleton width={56} height={56} variant="rounded" />
-            <div style={{ flex: 1 }}>
-              <Skeleton width="60%" height={17} style={{ marginBottom: '4px' }} />
-              <Skeleton width="80%" height={14} />
-            </div>
-          </div>
+          <FavoriteSkeleton key={i} />
         ))}
       </div>
     );
