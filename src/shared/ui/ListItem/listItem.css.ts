@@ -6,7 +6,7 @@ export const container = style({
   display: 'flex',
   alignItems: 'center',
   gap: spacing.lg,
-  padding: `${spacing.md} 0`,
+  padding: `${spacing.md} 8px`,
   cursor: 'pointer',
   transition: 'background-color 0.15s ease',
   borderBottom: `1px solid ${color.border}`,
