@@ -1,5 +1,4 @@
-import type { Environment, Platform } from '@app/store';
-
+import type { Environment, Platform } from '@app/providers/device';
 import type { Language } from '@app/providers/i18n';
 
 // 서비스별 노출 조건 정의

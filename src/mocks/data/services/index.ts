@@ -1,5 +1,5 @@
+import type { Environment, Platform } from '@app/providers/device';
 import type { Language } from '@app/providers/i18n';
-import type { Environment, Platform } from '@app/store';
 
 import type { Service } from '@shared/types';
 
