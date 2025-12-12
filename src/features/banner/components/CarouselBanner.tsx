@@ -22,7 +22,7 @@ export function CarouselBanner() {
     return (
       <div className={styles.container}>
         <div className={styles.slide}>
-          <Skeleton width="100%" height={120} />
+          <Skeleton width="100%" height={120} style={{ borderRadius: 0 }} />
         </div>
       </div>
     );
@@ -42,9 +42,9 @@ export function CarouselBanner() {
           cursor: isDragging ? 'grabbing' : 'pointer',
         }}
       >
-        {banners.map((banner) => (
+        {banners.map((banner, index) => (
           <div key={banner.id} className={styles.slide}>
-            <BannerItem banner={banner} />
+            <BannerItem banner={banner} isFirst={index === 0} />
           </div>
         ))}
       </div>

@@ -3,6 +3,7 @@ import * as styles from './BannerItem.css';
 
 interface BannerItemProps {
   banner: Banner;
+  isFirst?: boolean;
 }
 
 /**
@@ -31,7 +32,7 @@ function renderDescription(description: string) {
   });
 }
 
-export function BannerItem({ banner }: BannerItemProps) {
+export function BannerItem({ banner, isFirst = false }: BannerItemProps) {
   const handleClick = () => {
     window.open(banner.linkUrl, '_blank', 'noopener,noreferrer');
   };
@@ -44,8 +45,9 @@ export function BannerItem({ banner }: BannerItemProps) {
           src={banner.image.original}
           alt=""
           className={styles.image}
-          loading="lazy"
-          decoding="async"
+          loading={isFirst ? 'eager' : 'lazy'}
+          decoding={isFirst ? 'sync' : 'async'}
+          fetchPriority={isFirst ? 'high' : undefined}
         />
       </picture>
       <div className={styles.content}>
