@@ -59,7 +59,6 @@ export function BannerItem({ banner, isFirst = false }: BannerItemProps) {
         {banner.ctaText && (
           <button className={styles.ctaButton} onClick={handleClick}>
             {banner.ctaText}
-            <span className={styles.arrow}>›</span>
           </button>
         )}
       </div>
