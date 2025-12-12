@@ -1,7 +1,6 @@
 import type { Favorite } from '@shared/types';
 
-const IMAGE_BASE_URL =
-  'https://raw.githubusercontent.com/KyungeunKim/iotrust-frontend-homework/main/images';
+const IMAGE_BASE_URL = import.meta.env.VITE_IMAGE_BASE_URL;
 
 // mock-data-guide에 정의된 즐겨찾기 데이터
 export const mockFavorites: Favorite[] = [
