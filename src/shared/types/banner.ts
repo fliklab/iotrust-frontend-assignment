@@ -1,3 +1,5 @@
+import type { Language } from '@app/providers/i18n';
+
 export interface Banner {
   id: string;
   imageUrl: string;
@@ -8,7 +10,7 @@ export interface Banner {
 }
 
 export interface BannerListParams {
-  language: 'ko' | 'en';
+  language: Language;
 }
 
 export interface BannerListResponse {

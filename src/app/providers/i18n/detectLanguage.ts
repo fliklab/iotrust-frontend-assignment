@@ -1,7 +1,11 @@
 export type Language = 'ko' | 'en';
 
-const SUPPORTED_LANGUAGES: Language[] = ['ko', 'en'];
-const DEFAULT_LANGUAGE: Language = 'en';
+export const SUPPORTED_LANGUAGES: Language[] = ['ko', 'en'];
+export const DEFAULT_LANGUAGE: Language = 'en';
+
+export function isValidLanguage(lang: string): lang is Language {
+  return SUPPORTED_LANGUAGES.includes(lang as Language);
+}
 
 /**
  * Detects user's preferred language from browser settings.
@@ -29,4 +33,16 @@ export function detectLanguage(): Language {
   }
 
   return DEFAULT_LANGUAGE;
+}
+
+/**
+ * Gets initial language from URL path or falls back to browser detection.
+ * Priority: URL path > browser settings
+ */
+export function getInitialLanguage(): Language {
+  const pathLang = window.location.pathname.split('/')[1];
+  if (isValidLanguage(pathLang)) {
+    return pathLang;
+  }
+  return detectLanguage();
 }

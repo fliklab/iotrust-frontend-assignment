@@ -1,5 +1,7 @@
 import { create } from 'zustand';
 
+import { detectPlatform } from '@app/providers/device';
+import { getInitialLanguage } from '@app/providers/i18n';
 import type { Language } from '@app/providers/i18n';
 
 export type Platform = 'android' | 'ios';
@@ -20,8 +22,8 @@ const getEnv = (): Environment => {
 };
 
 export const useAppStore = create<AppState>((set) => ({
-  language: 'ko',
-  platform: 'android',
+  language: getInitialLanguage(),
+  platform: detectPlatform(),
   env: getEnv(),
   setLanguage: (language) => set({ language }),
   setPlatform: (platform) => set({ platform }),

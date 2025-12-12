@@ -1,11 +1,19 @@
 import { useQuery } from '@tanstack/react-query';
-import { useTranslation } from 'react-i18next';
+
+import {
+  DEFAULT_LANGUAGE,
+  isValidLanguage,
+  type Language,
+} from '@app/providers/i18n';
+import { useAppStore } from '@app/store';
 
 import { fetchBanners } from '../api';
 
 export function useFetchBannerList() {
-  const { i18n } = useTranslation();
-  const language = (i18n.language as 'ko' | 'en') || 'en';
+  const storeLanguage = useAppStore((state) => state.language);
+  const language: Language = isValidLanguage(storeLanguage)
+    ? storeLanguage
+    : DEFAULT_LANGUAGE;
 
   return useQuery({
     queryKey: ['banners', language],
