@@ -13,9 +13,7 @@ export const searchWrapper = style({
 });
 
 export const listContainer = style({
-  flex: 1,
-  overflow: 'auto',
-  height: '400px',
+  width: '100%',
 });
 
 export const virtualListWrapper = style({

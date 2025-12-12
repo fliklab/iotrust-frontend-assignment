@@ -1,7 +1,7 @@
-import { useEffect, useMemo, useRef, useState } from 'react';
+import { useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
-import { useVirtualizer } from '@tanstack/react-virtual';
+import { useWindowVirtualizer } from '@tanstack/react-virtual';
 
 import { ErrorFallback, SectionTitle } from '@shared/ui';
 
@@ -30,7 +30,7 @@ function filterServices(services: Service[], search: string): Service[] {
 
 export function ServiceList() {
   const { t } = useTranslation();
-  const parentRef = useRef<HTMLDivElement>(null);
+  const listRef = useRef<HTMLDivElement>(null);
   const { searchTerm, setSearchTerm, debouncedSearch } = useServiceSearch();
   const [selectedService, setSelectedService] = useState<Service | null>(null);
 
@@ -64,12 +64,31 @@ export function ServiceList() {
     [allLoadedItems, debouncedSearch]
   );
 
-  // NOTE: useVirtualizer는 React Compiler의 자동 최적화 대상에서 제외되지만 동작에는 문제 없음.
-  const virtualizer = useVirtualizer({
+  const [scrollMargin, setScrollMargin] = useState(0);
+
+  // scrollMargin 계산 - listRef가 연결된 후 실행
+  useLayoutEffect(() => {
+    const updateScrollMargin = () => {
+      if (listRef.current) {
+        const rect = listRef.current.getBoundingClientRect();
+        const scrollTop = window.scrollY || document.documentElement.scrollTop;
+        setScrollMargin(rect.top + scrollTop);
+      }
+    };
+
+    updateScrollMargin();
+
+    // 레이아웃 변경 시 scrollMargin 재계산 (배너/즐겨찾기 로딩 완료 등)
+    window.addEventListener('resize', updateScrollMargin);
+    return () => window.removeEventListener('resize', updateScrollMargin);
+  }, [isLoading]); // isLoading이 변경되면 재계산
+
+  // NOTE: useWindowVirtualizer는 React Compiler의 자동 최적화 대상에서 제외되지만 동작에는 문제 없음.
+  const virtualizer = useWindowVirtualizer({
     count: filteredItems.length,
-    getScrollElement: () => parentRef.current,
     estimateSize: () => ITEM_HEIGHT,
     overscan: OVERSCAN,
+    scrollMargin,
   });
 
   const virtualItems = virtualizer.getVirtualItems();
@@ -151,7 +170,7 @@ export function ServiceList() {
             : t('services.empty')}
         </div>
       ) : (
-        <div ref={parentRef} className={styles.listContainer}>
+        <div ref={listRef} className={styles.listContainer}>
           <div
             className={styles.virtualListWrapper}
             style={{ height: virtualizer.getTotalSize() }}
@@ -164,7 +183,7 @@ export function ServiceList() {
                   className={styles.virtualItem}
                   style={{
                     height: virtualItem.size,
-                    transform: `translateY(${virtualItem.start}px)`,
+                    transform: `translateY(${virtualItem.start - virtualizer.options.scrollMargin}px)`,
                   }}
                 >
                   <ServiceItem
