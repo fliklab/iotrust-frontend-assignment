@@ -15,7 +15,7 @@ export const bannersEn: Banner[] = [
     id: 'banner-dcent',
     imageUrl: `${IMAGE_BASE_URL}/banner_dcent.png`,
     linkUrl: 'https://store.dcentwallet.com',
-    description: "Enhance your security with D'CENT biometric wallet",
+    description: "Enhance your security with\n**D'CENT biometric wallet**!",
     ctaText: 'Buy Now',
     order: 2,
   },
@@ -24,7 +24,7 @@ export const bannersEn: Banner[] = [
     imageUrl: `${IMAGE_BASE_URL}/banner_blog.png`,
     linkUrl: 'https://store.dcentwallet.com/blogs/post',
     description:
-      "Visit the new D'CENT Blog to explore the latest updates first!",
+      "Visit the new ``**D'CENT Blog**`` to explore the latest updates first!",
     ctaText: 'Explore',
     order: 3,
   },

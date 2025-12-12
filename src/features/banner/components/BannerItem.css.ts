@@ -27,6 +27,19 @@ export const content = style({
   height: '100%',
   padding: spacing.lg,
   paddingBottom: spacing.xl,
+  gap: spacing.md,
+});
+
+export const description = style({
+  fontSize: typography.h2.fontSize,
+  fontWeight: '400',
+  color: color.white,
+  lineHeight: '1.4',
+  margin: 0,
+});
+
+export const descriptionBold = style({
+  fontWeight: '700',
 });
 
 export const title = style({
