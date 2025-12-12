@@ -1,32 +1,29 @@
 import type { Favorite } from '@shared/types';
 
+const IMAGE_BASE_URL =
+  'https://raw.githubusercontent.com/KyungeunKim/iotrust-frontend-homework/main/images';
+
+// mock-data-guide에 정의된 즐겨찾기 데이터
 export const mockFavorites: Favorite[] = [
   {
-    id: 'fav-1',
-    serviceId: 'service-1',
-    name: 'Uniswap',
-    iconUrl: 'https://picsum.photos/seed/uniswap/100/100',
-    url: 'https://uniswap.org',
-  },
-  {
-    id: 'fav-2',
-    serviceId: 'service-2',
-    name: 'OpenSea',
-    iconUrl: 'https://picsum.photos/seed/opensea/100/100',
+    id: 'fav-opensea',
+    serviceId: 'opensea',
+    name: 'OpenSea, the largest NFT marketplace',
+    iconUrl: `${IMAGE_BASE_URL}/icon_opensea.png`,
     url: 'https://opensea.io',
   },
   {
-    id: 'fav-3',
-    serviceId: 'service-3',
-    name: 'Aave',
-    iconUrl: 'https://picsum.photos/seed/aave/100/100',
-    url: 'https://aave.com',
+    id: 'fav-moonpay',
+    serviceId: 'moonpay',
+    name: 'MoonPay',
+    iconUrl: `${IMAGE_BASE_URL}/icon_moonpay.png`,
+    url: 'https://buy.moonpay.com/v2/buy',
   },
   {
-    id: 'fav-4',
-    serviceId: 'service-4',
-    name: 'Compound',
-    iconUrl: 'https://picsum.photos/seed/compound/100/100',
-    url: 'https://compound.finance',
+    id: 'fav-rarible',
+    serviceId: 'rarible',
+    name: 'Rarible - NFT Marketplace for Brands, Communities and Traders',
+    iconUrl: `${IMAGE_BASE_URL}/icon_rarible.png`,
+    url: 'https://rarible.com/',
   },
 ];

@@ -1,9 +1,10 @@
-import type { BannerListResponse } from '@shared/types';
+import type { BannerListParams, BannerListResponse } from '@shared/types';
 
-import { mockBanners } from '../data';
+import { getBannersByLanguage } from '../data';
 
-export function getBanners(): BannerListResponse {
+export function getBanners(params: BannerListParams): BannerListResponse {
+  const banners = getBannersByLanguage(params.language);
   return {
-    items: [...mockBanners].sort((a, b) => a.order - b.order),
+    items: [...banners].sort((a, b) => a.order - b.order),
   };
 }

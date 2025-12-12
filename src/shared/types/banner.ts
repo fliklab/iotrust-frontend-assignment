@@ -2,8 +2,13 @@ export interface Banner {
   id: string;
   imageUrl: string;
   linkUrl: string;
-  ctaText: string;
+  description?: string;
+  ctaText?: string;
   order: number;
+}
+
+export interface BannerListParams {
+  language: 'ko' | 'en';
 }
 
 export interface BannerListResponse {
