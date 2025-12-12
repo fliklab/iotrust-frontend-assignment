@@ -11,12 +11,30 @@ const slideUp = keyframes({
   },
 });
 
+const slideDown = keyframes({
+  from: {
+    transform: 'translateY(0)',
+  },
+  to: {
+    transform: 'translateY(100%)',
+  },
+});
+
 const fadeIn = keyframes({
   from: {
     opacity: 0,
   },
   to: {
     opacity: 1,
+  },
+});
+
+const fadeOut = keyframes({
+  from: {
+    opacity: 1,
+  },
+  to: {
+    opacity: 0,
   },
 });
 
@@ -33,8 +51,15 @@ export const overlay = style({
   position: 'fixed',
   inset: 0,
   backgroundColor: color.overlay,
-  animation: `${fadeIn} 0.2s ease-out`,
   pointerEvents: 'auto',
+});
+
+export const overlayOpen = style({
+  animation: `${fadeIn} 0.2s ease-out forwards`,
+});
+
+export const overlayClosing = style({
+  animation: `${fadeOut} 0.2s ease-out forwards`,
 });
 
 export const container = style({
@@ -46,12 +71,19 @@ export const container = style({
   borderTopLeftRadius: radii.lg,
   borderTopRightRadius: radii.lg,
   zIndex: 1,
-  animation: `${slideUp} 0.3s ease-out`,
   maxHeight: '80vh',
   minHeight: '50vh',
   display: 'flex',
   flexDirection: 'column',
   pointerEvents: 'auto',
+});
+
+export const containerOpen = style({
+  animation: `${slideUp} 0.3s ease-out forwards`,
+});
+
+export const containerClosing = style({
+  animation: `${slideDown} 0.3s ease-out forwards`,
 });
 
 export const header = style({

@@ -1,9 +1,11 @@
 import type { ReactNode } from 'react';
-import { useEffect } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 
 import { X } from 'lucide-react';
 
 import * as styles from './bottomSheet.css';
+
+const ANIMATION_DURATION = 300;
 
 interface BottomSheetProps {
   isOpen: boolean;
@@ -18,9 +20,38 @@ export function BottomSheet({
   children,
   footer,
 }: BottomSheetProps) {
+  const [isClosing, setIsClosing] = useState(false);
+  const closeTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  // Keep rendered while closing animation plays
+  const shouldRender = isOpen || isClosing;
+
+  // Reset closing state when opened
+  if (isOpen && isClosing) {
+    setIsClosing(false);
+  }
+
+  // Cleanup timeout on unmount
+  useEffect(() => {
+    return () => {
+      if (closeTimeoutRef.current) {
+        clearTimeout(closeTimeoutRef.current);
+      }
+    };
+  }, []);
+
+  const handleClose = useCallback(() => {
+    if (isClosing) return;
+    setIsClosing(true);
+    closeTimeoutRef.current = setTimeout(() => {
+      setIsClosing(false);
+      onClose();
+    }, ANIMATION_DURATION);
+  }, [isClosing, onClose]);
+
   // Prevent body scroll when open
   useEffect(() => {
-    if (isOpen) {
+    if (shouldRender) {
       document.body.style.overflow = 'hidden';
     } else {
       document.body.style.overflow = '';
@@ -29,35 +60,39 @@ export function BottomSheet({
     return () => {
       document.body.style.overflow = '';
     };
-  }, [isOpen]);
+  }, [shouldRender]);
 
   // Handle escape key
   useEffect(() => {
     const handleEscape = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') {
-        onClose();
+      if (e.key === 'Escape' && !isClosing) {
+        handleClose();
       }
     };
 
-    if (isOpen) {
+    if (shouldRender) {
       document.addEventListener('keydown', handleEscape);
     }
 
     return () => {
       document.removeEventListener('keydown', handleEscape);
     };
-  }, [isOpen, onClose]);
+  }, [shouldRender, isClosing, handleClose]);
 
-  if (!isOpen) return null;
+  if (!shouldRender) return null;
+
+  const overlayClassName = `${styles.overlay} ${isClosing ? styles.overlayClosing : styles.overlayOpen}`;
+  const containerClassName = `${styles.container} ${isClosing ? styles.containerClosing : styles.containerOpen}`;
 
   return (
     <div className={styles.wrapper}>
-      <div className={styles.overlay} onClick={onClose} />
-      <div className={styles.container}>
+      <div className={overlayClassName} onClick={isClosing ? undefined : handleClose} />
+      <div className={containerClassName}>
         <div className={styles.header}>
           <button
             className={styles.closeButton}
-            onClick={onClose}
+            onClick={handleClose}
+            disabled={isClosing}
             aria-label="Close"
           >
             <X size={24} />
